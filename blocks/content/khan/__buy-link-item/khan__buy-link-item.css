@@ -1,0 +1,9 @@
+.khan__buy-link-item {
+	font-size: 30px;
+	line-height: 42px;
+	font-weight: 400;
+}
+
+.khan__buy-link-item::after {
+	content: "\2192";
+}
