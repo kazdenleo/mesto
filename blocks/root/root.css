@@ -1,10 +1,19 @@
-a {
-    color: #2f80ed;
-    text-decoration: none;
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	src: url("../../fonts/Inter/Inter-Regular.woff2") format("woff2"),
+		 url("../../fonts/Inter/Inter-Regular.woff") format("woff");
 }
 
-.page {
-    min-width: 1100px;
-    max-width: 1600px;
-    margin: 0 auto;
+@font-face {
+	font-family: 'Inter';
+  	font-style: bold;
+  	font-weight: 700;
+ 	src: url("../../fonts/Inter/Inter-Bold.woff2") format("woff2"),
+   		 url("../../fonts/Inter/Inter-Bold.woff") format("woff");
+}
+
+body {
+	background-color: #2A2C2F;
 }
