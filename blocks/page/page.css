@@ -10,3 +10,15 @@
 	width: 100%;
 	box-sizing: border-box;
 }
+
+@media screen and (max-width: 940px) {
+	.page {
+		padding: 0 27px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.page {
+		padding: 0 19px;
+	}
+}
