@@ -11,5 +11,5 @@
 
 .elements__like-img:active {
 	opacity: 1;
-	background: url('/img/like-black.svg');
+	background: url('img/like-black.svg');
 }
