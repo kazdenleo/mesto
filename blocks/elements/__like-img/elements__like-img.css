@@ -1,0 +1,15 @@
+.elements__like-img {
+	max-width: 22px;
+	max-height: 19px;
+	margin: 5px 5px 1px 0;
+	transition: .3s;
+}
+
+.elements__like-img:hover {
+	opacity: .6;
+}
+
+.elements__like-img:active {
+	opacity: 1;
+	background: url('/img/like-black.svg');
+}
