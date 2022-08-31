@@ -84,15 +84,22 @@ function formSubmitEdit(evt) {
 	evt.preventDefault();
 	const popupInputEdit = popupEdit.querySelectorAll('.popup__text');
 	initialCards.push({'name': popupInputEdit[0].value, 'link': popupInputEdit[1].value});
-
 	makeNewPost();
 	showCloseForm(event);
 }
 popupEdit.addEventListener('submit', formSubmitEdit);
 
-  // Постановка и удаление Like на пост
+// Постановка и удаление Like на пост
 document.querySelectorAll('.elements__like-img').forEach(item => {
 	item.addEventListener('click', event => {
 		item.classList.toggle('elements__like-img_active')
+	})
+})
+
+// Удаление поста
+document.querySelectorAll('.elements__delete').forEach(function (item, index) {
+		item.addEventListener('click', event => {
+		initialCards.splice(index, 1);
+		item.parentNode.remove()
 	})
 })
