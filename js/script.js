@@ -90,9 +90,16 @@ function formSubmitEdit(evt) {
 }
 popupEdit.addEventListener('submit', formSubmitEdit);
 
-  // Постановка и удаление Like на пост
+// Постановка и удаление Like на пост
 document.querySelectorAll('.elements__like-img').forEach(item => {
 	item.addEventListener('click', event => {
 		item.classList.toggle('elements__like-img_active')
 	})
 })
+
+// Открытие popup с увеличенной картинкой поста
+/*const postImg = list.querySelectorAll('.elements__img').forEach(item => {
+	item.addEventListener('click', event => {
+		item.classList.add('elements__img_active')
+	})
+})*/
