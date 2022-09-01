@@ -79,27 +79,52 @@ function makeNewPost() {
 	list.append(item)
 }
 
+// Постановка и удаление Like на пост
+likePost();
+function likePost() {
+	document.querySelectorAll('.elements__like-img').forEach(item => {
+		item.addEventListener('click', event => {
+			item.classList.toggle('elements__like-img_active')
+		})
+	})
+}
+
 // Забираем из текстовых полей значения названия и ссылку на картинку
+popupEdit.addEventListener('submit', formSubmitEdit);
 function formSubmitEdit(evt) {
 	evt.preventDefault();
 	const popupInputEdit = popupEdit.querySelectorAll('.popup__text');
 	initialCards.push({'name': popupInputEdit[0].value, 'link': popupInputEdit[1].value});
 	makeNewPost();
 	showCloseForm(event);
+	likePost()
+	deletePost()
 }
-popupEdit.addEventListener('submit', formSubmitEdit);
-
-// Постановка и удаление Like на пост
-document.querySelectorAll('.elements__like-img').forEach(item => {
-	item.addEventListener('click', event => {
-		item.classList.toggle('elements__like-img_active')
-	})
-})
 
 // Удаление поста
-document.querySelectorAll('.elements__delete').forEach(function (item, index) {
+deletePost()
+function deletePost() {
+	document.querySelectorAll('.elements__delete').forEach(function (item, index) {
 		item.addEventListener('click', event => {
 		initialCards.splice(index, 1);
 		item.parentNode.remove()
+		})
+	})
+}
+
+// Открытие popup с увеличенной картинкой поста
+const popup = document.querySelector('.elements__popup-bg');
+const townName = document.querySelectorAll('.elements__title');
+document.querySelectorAll('.elements__img').forEach(function (item, index) {
+	item.addEventListener('click', event => {
+		popup.querySelector('.elements__popup-img').src = item.src;
+		popup.querySelector('.elements__popup-img').alt = item.alt;
+		popup.querySelector('.elements__popup-title').textContent = townName[index].textContent;
+		popup.classList.add('elements__popup-bg_active')
 	})
 })
+
+// Закрытие popup с увеличенной картинкой поста
+document.querySelector('.elements__popup-exit').addEventListener('click', function() {
+	popup.classList.remove('elements__popup-bg_active')
+});
