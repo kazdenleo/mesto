@@ -9,11 +9,25 @@ const exitButton = document.querySelectorAll('.popup__exit');
 exitButton[0].addEventListener('click', showCloseForm);
 exitButton[1].addEventListener('click', showCloseForm);
 
+window.addEventListener('keydown', (event) => {
+	if (event.key === 'Escape') {
+		showCloseForm(event);
+	}
+});
+
+document.addEventListener( 'click', (e) => {
+	const Popup = document.getElementById(`${e.target.id}`);
+	const whereClick = e.composedPath().includes(Popup);
+	if (whereClick) {
+		document.getElementById(`${e.target.id}`).classList.remove('popup_opened');	
+	} 
+})
+
 function showCloseForm(ev) {
-	if (ev.target.classList.contains('profile__button-img')) {
-		document.querySelector('#edit').classList.toggle('popup_opened');
-	} else if (ev.target.classList.contains('profile__edit-button')) { 
+	if (ev.target.classList.contains('profile__edit-button')) {
 		document.querySelector('#profile').classList.toggle('popup_opened');
+	} else if (ev.target.classList.contains('profile__button-img')) { 
+		document.querySelector('#edit').classList.toggle('popup_opened');
 	} else {
 		document.querySelectorAll('.popup')[0].classList.remove('popup_opened');
 		document.querySelectorAll('.popup')[1].classList.remove('popup_opened');

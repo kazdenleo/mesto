@@ -42,27 +42,38 @@
 				<h5 class="elements__popup-title">Карачаевск</h5>
 			</div>
 		</div>
-		
-		
 		<div class="popup" id="profile">
-			<form class="popup__container">
+			<form class="popup__container" name="profilEdit" id="profileEdit">
 				<img class="popup__exit" src="img/exit.png" alt="Закрыть">
 				<h5 class="popup__title">Редактировать профиль</h5>
-				<input class="popup__text" type="text" name="name" id="name1" placeholder="Введите имя" required autofocus>
-				<input class="popup__text" type="text" name="info" id="name2" placeholder="Введите дополнительную информацию" required>
-				<input class="popup__submit" type="submit" name="info" id="name3" placeholder="Сохранить">
+				<label class="popup__label">
+					<input class="popup__text" required minlength="2" maxlength="40" type="text" name="name" id="name" placeholder="Введите имя" required autofocus>
+					<span class="popup__error popup__error_name"></span>
+				</label>
+				<label class="popup__label">
+					<input class="popup__text" required minlength="2" maxlength="200" type="text" name="info" id="info" placeholder="Введите дополнительную информацию" required>
+					<span class="popup__error popup__error_info"></span>
+				</label>
+				<input class="popup__submit popup__submit_error" disabled="disabled" type="submit" name="info" id="name3" placeholder="Сохранить">
 			</form>
 		</div>
 		<div class="popup" id="edit">
-			<form class="popup__container">
+			<form class="popup__container" name="postEdit">
 				<img class="popup__exit" src="img/exit.png" alt="Закрыть">
 				<h5 class="popup__title">Новое место</h5>
-				<input class="popup__text" type="text" name="nameplace" id="nameplace" placeholder="Название" required autofocus>
-				<input class="popup__text" type="text" name="link" id="link" placeholder="Ссылка на картинку" required>
-				<input class="popup__submit" type="submit" name="info" id="name" placeholder="Сохранить">
+				<label class="popup__label">
+					<input class="popup__text" type="text" minlength="2" maxlength="30" name="nameplace" id="nameplace" placeholder="Название" required autofocus>
+					<span class="popup__error popup__error_nameplace"></span>
+				</label>
+				<label class="popup__label">
+					<input class="popup__text" type="url" name="link" id="link" placeholder="Ссылка на картинку" required>
+					<span class="popup__error popup__error_link"></span>
+				</label>
+				<input class="popup__submit popup__submit_error" disabled="disabled" type="submit" name="info" id="name" placeholder="Сохранить">
 			</form>
 		</div>
 	</div>
 	<script src="js/script.js"></script>
+	<script src="js/validate.js"></script>
 </body>
 </html>

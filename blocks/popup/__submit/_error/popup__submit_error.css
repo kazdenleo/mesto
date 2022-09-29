@@ -1,0 +1,13 @@
+.popup__submit_error {
+    border: 1px solid rgba(0, 0, 0, 1);
+    opacity: .2;
+    border-radius: 2px;
+    color: #000;
+    cursor: default;
+    background: #E5E5E5;
+    transition: .3s;
+}
+
+.popup__submit_error:hover {
+	opacity: .2;
+}
