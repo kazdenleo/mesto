@@ -42,8 +42,8 @@
 				<h5 class="elements__popup-title">Карачаевск</h5>
 			</div>
 		</div>
-		<div class="popup" id="profile">
-			<form class="popup__container" name="profilEdit" id="profileEdit">
+		<div class="popup" id="profilePopup">
+			<form class="popup__container" name="profilEdit" id="profile" novalidate>
 				<img class="popup__exit" src="img/exit.png" alt="Закрыть">
 				<h5 class="popup__title">Редактировать профиль</h5>
 				<label class="popup__label">
@@ -57,8 +57,8 @@
 				<input class="popup__submit popup__submit_error" disabled="disabled" type="submit" name="info" id="name3" placeholder="Сохранить">
 			</form>
 		</div>
-		<div class="popup" id="edit">
-			<form class="popup__container" name="postEdit">
+		<div class="popup" id="editPopup">
+			<form class="popup__container" name="postEdit" id="edit" novalidate>
 				<img class="popup__exit" src="img/exit.png" alt="Закрыть">
 				<h5 class="popup__title">Новое место</h5>
 				<label class="popup__label">
@@ -73,7 +73,7 @@
 			</form>
 		</div>
 	</div>
-	<script src="js/script.js"></script>
-	<script src="js/validate.js"></script>
+	<script type="module" src="js/script.js"></script>
+	<script type="module" src="js/validate.js"></script>
 </body>
 </html>

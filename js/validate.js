@@ -1,61 +1,64 @@
-/*enableValidation({
-formSelector: '.popup__form',
-inputSelector: '.popup__input',
-submitButtonSelector: '.popup__button',
-inactiveButtonClass: 'popup__button_disabled',
-inputErrorClass: 'popup__input_type_error',
-errorClass: 'popup__error_visible'
-});*/
+export const enableValidation = {
+    formSelector: '.popup__container',
+    inputSelector: '.popup__text',
+    submitButtonSelector: '.popup__submit',
+    inactiveButtonClass: 'popup__submit_error',
+    inputErrorClass: 'popup__error',
+    errorClass: 'popup__error_active'
+} ;
 
-const enableVlidation = () => {
-let formList = Array.from(document.querySelectorAll('.popup'))
-formList.forEach((formElement) => {
-formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-});
-    setEventListeners(formElement);
-});
-}
-
-const setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll('.popup__text'));
-    inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', function () {
-        isValid(formElement, inputElement);
-      });
-    });
-};
-
-const isValid = (formElement, inputElement) => {
-if (!inputElement.validity.valid) {
-    // Если поле не проходит валидацию, покажем ошибку
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-} else {
-    // Если проходит, скроем
-    hideInputError(formElement, inputElement);
+export class FormValidator {
+    constructor(enableValidation, templateForm) {
+        this._validateOptions = enableValidation;
+        this._template = templateForm;
     }
-};
 
-// Функция, которая добавляет класс с ошибкой
-const showInputError = (formElement, inputElement, errorMessage) => {
-    const errorElement = formElement.querySelector(`.popup__error_${inputElement.id}`);
-    const buttonElement = formElement.querySelector(`.popup__submit`);
-    inputElement.classList.add('popup__text_type_error');
-    errorElement.classList.add(`popup__error_active`);
-    errorElement.textContent = errorMessage;
-    buttonElement.classList.add('popup__submit_error');
-    buttonElement.setAttribute("disabled", "disabled");
-};
+    _setEventListeners(profileForm) {
+        const inputList = profileForm.querySelectorAll(this._validateOptions.inputSelector);
+        
+        this._handleFormInput(profileForm, this._validateOptions);
+        profileForm.addEventListener('input', evt => {
+                this._handleFormInput(profileForm, this._validateOptions);
+        })
+        inputList.forEach((inputElement) => {
+            inputElement.addEventListener('input', event => {
+               this._isvalid(profileForm, inputElement, inputElement.validationMessage);
+            })
+        })
+    }
 
-// Функция, которая удаляет класс с ошибкой
-const hideInputError = (formElement, inputElement) => {
-    const errorElement = formElement.querySelector(`.popup__error_${inputElement.id}`);
-    const buttonElement = formElement.querySelector(`.popup__submit`);
-    inputElement.classList.remove('popup__text_type_error');
-    errorElement.classList.remove(`popup__error_active`);
-    errorElement.textContent = '';
-    buttonElement.classList.remove('popup__submit_error');
-    buttonElement.removeAttribute("disabled", "disabled");
-};
+    _isvalid(profileForm, inputElement) {
+        const errorInput = profileForm.querySelector(`.popup__error_${inputElement.id}`);
+        if (!inputElement.validity.valid) {
+            this._showInputError(profileForm, errorInput, inputElement, inputElement.validationMessage);
+        } else {
+            this._hideInputError(inputElement, errorInput);
+        }
+    };
 
-enableVlidation();
+    _showInputError(profileForm, errorInput, inputElement, errorMessage) {
+        errorInput.classList.add(this._validateOptions.errorClass);
+        errorInput.textContent = errorMessage;
+        console.log(this._validateOptions.inputErrorClass)
+        inputElement.classList.remove(this._validateOptions.inputErrorClass);
+    }
+
+    _hideInputError(inputElement, errorInput) {
+        errorInput.classList.remove(this._validateOptions.errorClass);
+    }
+
+    enableValidation() {
+        const profileForm = document.querySelector(`${this._template}`);
+        profileForm.addEventListener("submit", (evt) => {
+            evt.preventDefault();
+        });
+        this._setEventListeners(profileForm);
+    }
+
+    _handleFormInput(profileForm, validateOptions) {
+        const hasErrors = !profileForm.checkValidity();
+        const buttonForm = profileForm.querySelector(validateOptions.submitButtonSelector);
+        buttonForm.disabled = hasErrors;
+        buttonForm.classList.toggle(validateOptions.inactiveButtonClass, hasErrors);
+    }
+}
